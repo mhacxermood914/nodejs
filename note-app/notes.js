@@ -7,17 +7,27 @@ const getNotes = () => {
 const addNotes = (title,body) => {
 
     const notes = loadNotes()
+    console.log("1.",notes)
 
-    if(Array.isArray(notes) && !notes.length){
+    if(Array.isArray(notes)){
         notes.push({
             title,
             body
         })
 
-        console.log(notes)
+        saveNotes(notes)
     }
 
-    saveNotes(notes)
+}
+
+const removeNotes = (title)=>{
+    const notes = loadNotes()
+    console.log({notes})
+    if (Array.isArray(notes) && notes.length>0){
+        const newNotes = notes.filter((e)=>e.title!=title)
+        console.log({newNotes})
+        saveNotes(newNotes)
+    }
 }
 
 const saveNotes = (notes)=>{
@@ -36,5 +46,6 @@ const loadNotes = ()=>{
 
 module.exports={
     getNotes,
-    addNotes
+    addNotes,
+    removeNotes
 }
