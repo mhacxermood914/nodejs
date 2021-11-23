@@ -1,3 +1,4 @@
+const { Certificate } = require('crypto');
 const fs = require('fs'),chalk = require('chalk')
 
 const getNotes = () => {
@@ -38,6 +39,23 @@ const listNotes = ()=>{
     })
 }
 
+const readNotes = (title)=>{
+    const note = loadNotes().find((e)=>e.title==title)
+    //console.log({note})
+    try
+    {
+        if(note){
+            console.log(chalk.inverse(note.title))
+            console.log(note.body)
+        }else{
+            console.log(chalk.inverse.red('Not found'))
+        }
+
+    }catch(e){
+        return ;
+    }
+}
+
 const saveNotes = (notes)=>{
     fs.writeFileSync('notes.json',JSON.stringify(notes))
 }
@@ -56,5 +74,6 @@ module.exports={
     getNotes,
     addNotes,
     removeNotes,
-    listNotes
+    listNotes,
+    readNotes
 }
