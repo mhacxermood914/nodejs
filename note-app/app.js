@@ -2,7 +2,7 @@ const yargs = require('yargs')
 const {hideBin}=require('yargs/helpers')
 
 const argv =  yargs(hideBin(process.argv)).parse()
-const { addNotes, removeNotes}=require('./notes.js')
+const { addNotes, removeNotes,listNotes}=require('./notes.js')
 //create command
 console.log({argv})
 
@@ -45,7 +45,7 @@ yargs.command({
     command: 'list',
     describe: 'List Notes',
     handler: function () {
-        console.log('List out all notes')
+        listNotes()
     }
 })
 

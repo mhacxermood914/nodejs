@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs'),chalk = require('chalk')
 
 const getNotes = () => {
     return 'Your notes...';
@@ -30,6 +30,14 @@ const removeNotes = (title)=>{
     }
 }
 
+const listNotes = ()=>{
+    console.log(chalk.inverse('Your notes'))
+
+    loadNotes().forEach((note)=>{
+        console.log(note.title)
+    })
+}
+
 const saveNotes = (notes)=>{
     fs.writeFileSync('notes.json',JSON.stringify(notes))
 }
@@ -47,5 +55,6 @@ const loadNotes = ()=>{
 module.exports={
     getNotes,
     addNotes,
-    removeNotes
+    removeNotes,
+    listNotes
 }
